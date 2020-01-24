@@ -7,21 +7,29 @@ import pyperclip
 
 def main():
     """run the main module function"""
+
+    # define the url to get the email inbox data
     anonbox_url = 'https://www.anonbox.net/en/'
+    # get the page
     page = pq(requests.get(anonbox_url).content)
 
+    # scrape the page
     email_address_data = page('body div#content dl').children().eq(2)
     email_address_data = email_address_data('dd p')
+    inbox_url = page('dd p a').html()
 
+    # assemble the email address
     email_address =\
         email_address_data.html()[:10]\
         + email_address_data.html()[67:73]\
         + '.anonbox.com'
 
-    inbox_url = page('dd p a').html()
-
+    # throw the email address into the system clipboard
     pyperclip.copy(email_address)
+
+    # print to the terminal for good measure
     print(email_address)
     print(inbox_url)
 
+# run the main function (the actual script)
 main()
