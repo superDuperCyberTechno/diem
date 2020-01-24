@@ -1,20 +1,27 @@
 #!/usr/bin/env python3
+"""anonbox.net disposable email address CLI"""
 
 from pyquery import PyQuery as pq
-from lxml import etree
-import urllib
 import requests
 import pyperclip
 
-anonbox_url = 'https://www.anonbox.net/en/'
-page = pq(requests.get(anonbox_url).content)
+def main():
+    """run the main module function"""
+    anonbox_url = 'https://www.anonbox.net/en/'
+    page = pq(requests.get(anonbox_url).content)
 
-email_address_data = page('body div#content dl').children().eq(2)
-email_address_data = email_address_data('dd p')
+    email_address_data = page('body div#content dl').children().eq(2)
+    email_address_data = email_address_data('dd p')
 
-email_address = email_address_data.html()[:10] + email_address_data.html()[67:73] + '.anonbox.com'
-inbox_url = page('dd p a').html()
+    email_address =\
+        email_address_data.html()[:10]\
+        + email_address_data.html()[67:73]\
+        + '.anonbox.com'
 
-pyperclip.copy(email_address)
-print(email_address)
-print(inbox_url)
+    inbox_url = page('dd p a').html()
+
+    pyperclip.copy(email_address)
+    print(email_address)
+    print(inbox_url)
+
+main()
