@@ -1,5 +1,5 @@
 # diem
-### A CLI for disposable email addresses from [anonbox.net](https://www.anonbox.net/). Short for *Di*sposable *Em*ail.
+### A Linux CLI for disposable email addresses from [anonbox.net](https://www.anonbox.net/). Short for *Di*sposable *Em*ail.
 
 ### Installation
 In order to run _diem_ you need `python3`.
